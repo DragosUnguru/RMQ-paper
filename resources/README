@@ -1,0 +1,75 @@
+=============	Unguru Dragos-Gabriel 325CD		=============
+
+Arhiva este formata din:
+
+	->	alg1.cpp: programul aferent algoritmului lui Mo
+	->	alg2.cpp: programul aferent metodei "Sparse table"
+	->	alg3.cpp: programul aferent metodei Arborilor de intervale
+	->	Utils.cpp: program compus din functii, structuri si date ajutatoare
+	->	rng.cpp: program primitiv folosit pentru generarea testelor de input
+				(pus intr-un director separat pt a nu interfera cu makefile-ul)
+
+	->	driver.cpp: programul ce gestioneaza apelurile algoritmilor descrisi
+					mai sus
+
+	->	algos.h: fisierul header ce contine semnaturile functiilor aflate
+				 in alg1.cpp, alg2.cpp, alg3.cpp.
+	->	Utils.h: fisierul header ce contine semnaturile functiilor aflate
+				 in Utils.cpp
+
+	->	in/: directorul ce contine testele de intrare sub forma:
+
+			-> Testele 0 - 8: Teste random. Aceste teste reprezinta cea mai
+							comuna forma de date de intrare. Dintre acestea,
+							testul "test8.in" reprezinta un test format din mai
+							multe date de intrare (length(arr) = 45720). Ne vom
+							folosi de acest test pentru a evidentia cu usurinta
+							diferentele de performanta pentru acest tip de teste.
+
+			-> Testele 9 - 17: Teste cu dependinta polinomiala intre numarul
+							query-urilor si lungimea vectorului. Aceste teste
+							sunt variate, cu n apartinand intervalului (200, 8900).
+
+			-> Testele 18 - 26: Stress tests. Aceste teste sunt formate dintr-un n
+							de maxim 10^3 (pentru testele 18 - 24) si 10^4 (25 & 26).
+							Aceste teste sunt formate din numarul maxim de query-uri
+							posibile.
+
+			-> Testele 26 - 29: Teste unde vectorul de input se modifica pe parcurs.
+							Am luat ca date initiale (array-ul de inceput si
+							query-urile) datele testelor 7, 13 si 21. Avand astfel,
+							cate un test cu modificare pentru fiecare tip de test
+							enuntat mai sus. Pentru fiecare, vom avea 7 "seturi" de
+							modificari. Pentru fiecare set se va citi un numar (nr)
+							ce reprezinta numarul de elemente ce vor fi modificate,
+							iar apoi n randuri de forma "index new_value". Acest proces va fi repetat de 7 ori pentru fiecare din cele
+							3 teste.
+
+	->	out/: directorul ce contine output-urile aferente testelor 
+				 aflate in directorul input. Output-urile au fost generate ruland
+				 abordarea naiva a problemei RMQ pe input-urile generate.
+
+	->	checker.sh: script bash folosit de Makefile
+	->	Makefile: Descris mai jos:
+
+			$: make 	  -> compilare si link-editare
+			$: make check -> ruleaza checker, testand toate metodele pe toate testele
+			$: make clean -> sterge fisierele obiect generate si executabilul
+
+
+	IMPORTANT:
+
+		!!!-> Intrucat executabilul primeste argumente in linia de comanda, pentru
+			  rulare, va rog folositi executabilul generat de makefile pentru rulare.
+			  Este impotriva regulilor Makefile-ului de a trimite acesti parametri
+			  in linia de comanda. Folositi comenzi de forma: 
+			  							./tema <numele_metodei> <path_catre_input>
+
+		!!!-> Pentru a evita numarul mare de parametri in linia de comanda, programul
+			  afiseaza output-ul in 'stdout'. Pentru teste mari (si pentru un
+			  runtime decent) va rog folositi redirectare catre fisier " > ".
+
+		Ex:	$: ./tema mo ./in/test0.in
+			$: ./tema sparsetable ./in/test17.in > ./output/file.out
+			$: ./tema segmenttrees ./in/test24.in > out.txt
+			
